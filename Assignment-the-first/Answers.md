@@ -15,7 +15,8 @@
     
 ## Part 2
 1. Define the problem
-    - We need to go through each of the four read files and assembled into two separate records. .. These records will then be   
+    - We need to go through each of the four read files and assemble into two separate records. Each of the input files' records belongs to the same cluster 
+    - These records will then be   
 
 3. Describe output
     - Output should be written between 52 total files: 2 different unknowns, 2 different hopped, and 2 different for each of the 24 indexes. 
@@ -37,27 +38,41 @@
 5. Upload your [4 input FASTQ files](../TEST-input_FASTQ) and your [>=6 expected output FASTQ files](../TEST-output_FASTQ).
 6. Pseudocode
     ```
-    dictionary of {known_index_values:revcomp(known_index_values)}
+    set of {known_index_values}
+    dictionary of {filenames:record count starting at 0} (keys predetermined since you already know filenames)
 
+    open all of the 52 files (2 unknown, 2 hopped, 48 index)  
     open the 4 files (r1, r2, r3, r4) # r2 and r3 contain the indexes
       loop: iterate per record(every 4 lines) in each file
-        checking if r2 value & revcomp(r3 value) in the index dictionary:
+        checking if r2 value & reverseComplement(r3 value) exist in the index set:
           no:
-            add record w/ adjusted header to unknown
-            # adjusted meaning new header = "{old header}_{r2 value}-{revcomp(r3 value)}"
+            add record w/ adjusted header to unknown files (which depends on if biological R1 or R2)
+            increment count of dictionary for the filenames
+            # adjusted meaning new header = "{old header}_{r2 value}-{reverseComplement(r3 value)}"
           yes:
             checking if quality scores of index read within cutoff:
                 no:
-                      add record w/ adjusted header to unknown    
+                      add record w/ adjusted header to unknown files (which depends on if biological R1 or R2)
+                      increment count of dictionary for the filenames
                 yes:
-                  checking if r2 value & revcomp(r3 value) match:
+                  checking if r2 value & reverseComplement(r3 value) match:
                     no:
-                        add record w/ adjusted header to hopped
+                        add record w/ adjusted header to hopped files(which depends on if biological R1 or R2)
+                        increment count of dictionary for the filenames
                     yes:
-                      add record w/ adjusted header to matched
+                        add record w/ adjusted header to matched files(which depends on index, and if biological R1 or R2)
+                        increment count of dictionary for the filenames
+    all files closed
+    return counts for each file for user using the dictionary (how many records added to hopped, unknown, each of the indexes)
     ```
 8. High level functions. For each function, be sure to include:
     1. Description/doc string
     2. Function headers (name and parameters)
     3. Test examples for individual functions
     4. Return statement
+    
+    ```
+    def ()
+    return fileCounts
+    ```
+    Rest of my high level functions are from bioinfo.py.
