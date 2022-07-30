@@ -13,15 +13,18 @@
 2. Per-base NT distribution
     1. Use markdown to insert your 4 histograms here.
     
-    *Ignore the titles of the histograms, the code is fixed but I don't have time to rerun.
-    - index 1
-    ![hist_index1](https://user-images.githubusercontent.com/81830809/181865679-21f7f955-8b62-4f89-9266-48dfbe4e6b41.png)
-    - index 2
-    ![hist_index2](https://user-images.githubusercontent.com/81830809/181865715-7b45a4d7-7646-4ff1-9692-b32ab589ca08.png)
-    - biological read 1
-    ![hist_read1](https://user-images.githubusercontent.com/81830809/181865721-c3e5b2f3-b6cd-4e91-8271-0b9aa2bc805f.png)
-    - biological read 2
-    ![hist_read2](https://user-images.githubusercontent.com/81830809/181865733-c3f85031-5bb6-4c44-bc5b-ac30dd3b36ee.png)
+        *Ignore the titles of the histograms, the code is fixed but I don't have time to rerun.
+        - index 1
+        ![hist_index1](https://user-images.githubusercontent.com/81830809/181865679-21f7f955-8b62-4f89-9266-48dfbe4e6b41.png)
+        - index 2
+        ![hist_index2](https://user-images.githubusercontent.com/81830809/181865715-7b45a4d7-7646-4ff1-9692-b32ab589ca08.png)
+        - biological read 1
+        ![hist_read1](https://user-images.githubusercontent.com/81830809/181865721-c3e5b2f3-b6cd-4e91-8271-0b9aa2bc805f.png)
+        - biological read 2
+        ![hist_read2](https://user-images.githubusercontent.com/81830809/181865733-c3f85031-5bb6-4c44-bc5b-ac30dd3b36ee.png)
+    2. What is a good quality score cutoff for index reads and biological read pairs to utilize for sample identification and downstream analysis, respectively? Justify your answer.
+        - I determined that a good quality score cutoff for average index reads would be Q20. Q20 would enable the   
+    4. How many indexes have undetermined (N) base calls? (Utilize your command line tool knowledge. Submit the command(s) you used. CHALLENGE: use a one-line command)
 
     
 ## Part 2
