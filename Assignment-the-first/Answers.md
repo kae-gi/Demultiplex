@@ -23,9 +23,17 @@
         - biological read 2
         ![hist_read2](https://user-images.githubusercontent.com/81830809/181865733-c3f85031-5bb6-4c44-bc5b-ac30dd3b36ee.png)
     2. What is a good quality score cutoff for index reads and biological read pairs to utilize for sample identification and downstream analysis, respectively? Justify your answer.
-        - I determined that a good quality score cutoff for average index reads would be Q20. Q20 would enable the   
+        - I determined that a good quality score cutoff for average biological reads would be Q20. Q20 would enable the capture of most of the high data quality reads, while also leaving room for the alignment process to refine the data more. Since index scores are more important (would not want to misassign an index/barcord to the wrong score due to a poor average score), a quality score of Q30 would be more stringent to capture the high quality reads we want without eliminating too many.
     4. How many indexes have undetermined (N) base calls? (Utilize your command line tool knowledge. Submit the command(s) you used. CHALLENGE: use a one-line command)
-
+    ```
+    #finding how many indexes have N's
+    command: zcat 1294_S1_L008_R2_001.fastq.gz | sed -n 2~4p | grep "N" | wc -l
+    result: 3976613
+    command: zcat 1294_S1_L008_R3_001.fastq.gz | sed -n 2~4p | grep "N" | wc -l
+    result: 3328051
+    one line command: zcat 1294_S1_L008_R2_001.fastq.gz 1294_S1_L008_R3_001.fastq.gz | sed -n 2~4p | grep "N" | wc -l
+    total: 7304664
+    ```
     
 ## Part 2
 1. Define the problem
