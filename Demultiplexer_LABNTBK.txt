@@ -105,7 +105,8 @@ Pseudo code reviews... for Kobe, SJ, and Luiza
 =================================================
 Followed pseudocode pretty closely! Made some adjustments based on peer reviews from Isis, Matt, and Logan, but not much.
 
-Running my test files (summaryTests.txt is the currently meeting expected output):
+Running my NEW AND IMPROVED test files from /Tests (summaryTests.txt is the currently meeting expected output):
+(2 dual matched: AGAGTCCA, GTAGCGTA; 3 hopped; 1 unknown)
 -> srun --account=bgmp --partition=bgmp --nodes=1 --time=2:00:00 --cpus-per-task=20 --pty bash
 -> ./demultiplexer.py -k /projects/bgmp/shared/2017_sequencing/indexes.txt -r1 ./Tests/inputTest_R1.fq.gz -i1 ./Tests/inputTest_R2.fq.gz -i2 ./Tests/inputTest_R3.fq.gz -r2 ./Tests/inputTest_R4.fq.gz -n 6
 
