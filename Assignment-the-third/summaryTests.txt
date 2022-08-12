@@ -1,0 +1,64 @@
+=================================|SUMMARY|=================================
+Number of dual-matched index records: 2, Percent of records: 33.33%
+	Most common matched index pair: GTAGCGTA_GTAGCGTA, Percent of matched: 50.0%
+Number of unknown index records: 3, Percent of records: 50.0%
+Number of hopped index records: 1, Percent of records: 16.67%
+	Most common hopped index pair: TAGCCATG_TATGGCAC, Percent of hopped: 100.0%
+Total number of records: 6
+
+Number of Records Per file breakdown:
+File			Count
+=====================
+unknown_R1.fq	3
+unknown_R2.fq	3
+hopped_R1.fq	1
+hopped_R2.fq	1
+GTAGCGTA_R1.fq	1
+GTAGCGTA_R2.fq	1
+CGATCGAT_R1.fq	0
+CGATCGAT_R2.fq	0
+GATCAAGG_R1.fq	0
+GATCAAGG_R2.fq	0
+AACAGCGA_R1.fq	0
+AACAGCGA_R2.fq	0
+TAGCCATG_R1.fq	0
+TAGCCATG_R2.fq	0
+CGGTAATC_R1.fq	0
+CGGTAATC_R2.fq	0
+CTCTGGAT_R1.fq	0
+CTCTGGAT_R2.fq	0
+TACCGGAT_R1.fq	0
+TACCGGAT_R2.fq	0
+CTAGCTCA_R1.fq	0
+CTAGCTCA_R2.fq	0
+CACTTCAC_R1.fq	0
+CACTTCAC_R2.fq	0
+GCTACTCT_R1.fq	0
+GCTACTCT_R2.fq	0
+ACGATCAG_R1.fq	0
+ACGATCAG_R2.fq	0
+TATGGCAC_R1.fq	0
+TATGGCAC_R2.fq	0
+TGTTCCGT_R1.fq	0
+TGTTCCGT_R2.fq	0
+GTCCTAAG_R1.fq	0
+GTCCTAAG_R2.fq	0
+TCGACAAG_R1.fq	0
+TCGACAAG_R2.fq	0
+TCTTCGAC_R1.fq	0
+TCTTCGAC_R2.fq	0
+ATCATGCG_R1.fq	0
+ATCATGCG_R2.fq	0
+ATCGTGGT_R1.fq	0
+ATCGTGGT_R2.fq	0
+TCGAGAGT_R1.fq	0
+TCGAGAGT_R2.fq	0
+TCGGATTC_R1.fq	0
+TCGGATTC_R2.fq	0
+GATCTTGC_R1.fq	0
+GATCTTGC_R2.fq	0
+AGAGTCCA_R1.fq	1
+AGAGTCCA_R2.fq	1
+AGGATAGC_R1.fq	0
+AGGATAGC_R2.fq	0
+===========================================================================

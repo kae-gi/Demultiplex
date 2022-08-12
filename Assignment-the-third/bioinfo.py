@@ -11,7 +11,7 @@
 written during the Bioinformatics and Genomics Program coursework.
 You should update this docstring to reflect what you would like it to say'''
 
-__version__ = "0.5"         # Read way more about versioning here:
+__version__ = "0.6"         # Read way more about versioning here:
                             # https://en.wikipedia.org/wiki/Software_versioning
 
 DNA_bases = "ATGCN"
@@ -40,10 +40,10 @@ def validate_base_seq(seq: str,RNAflag=False) -> bool:
     """
     This function takes a string. Returns True if 
     string is composed of only As, Ts (or Us if RNAflag),
-    Gs, Cs. False otherwise. Case insensitive.
+    Gs, Cs, or Ns (unknown base). False otherwise. Case insensitive.
     """
     seq = seq.upper()
-    return len(seq) == seq.count("A") + seq.count("U" if RNAflag else "T") + seq.count("G") + seq.count("C")
+    return len(seq) == seq.count("N") + seq.count("A") + seq.count("U" if RNAflag else "T") + seq.count("G") + seq.count("C")
 
 def gc_content(DNA: str) -> float:
     """
