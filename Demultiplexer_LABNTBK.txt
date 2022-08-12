@@ -1,0 +1,121 @@
+*Demultiplexing assignment lab notebook* 
+author: Kaetlyn Gibson
+files located on Talapas as: /projects/bgmp/kaetlyng/bioinfo/Bi622/Demultiplex
+versions:
+-> Python 3.10.4
+
+=================================================
+||                    Part1                    ||
+=================================================
+navigate on Talapas to: /projects/bgmp/shared/2017_sequencing
+
+less -S README.txt:
+In the group column, 2/3/4 are different passages of cells. (Biological replicates)
+
+Technical replicates have the same treatment, but different letters (ex: 2A and 2B
+are controls from the same passage).
+
+If the group name is the same, it is a technical replicate at the level of library
+preparation. (i.e. different student)
+
+less -S indexes.txt:
+sample  group   treatment       index   index sequence
+1       2A      control 	B1      GTAGCGTA
+2       2B      control 	A5      CGATCGAT
+3       2B      control 	C1      GATCAAGG
+4       2C      mbnl    	B9      AACAGCGA
+6       2D      mbnl    	C9      TAGCCATG
+7       2E      fox     	C3      CGGTAATC
+8       2F      fox     	B3      CTCTGGAT
+10      2G      both    	C4      TACCGGAT
+11      2H      both    	A11     CTAGCTCA
+14      3B      control 	C7      CACTTCAC
+15      3C      mbnl    	B2      GCTACTCT
+16      3D      mbnl    	A1      ACGATCAG
+17      3E      fox     	B7      TATGGCAC
+19      3F      fox     	A3      TGTTCCGT
+21      3G      both    	B4      GTCCTAAG
+22      3H      both    	A12     TCGACAAG
+23      4A      control 	C10     TCTTCGAC
+24      4A      control 	A2      ATCATGCG
+27      4C      mbnl    	C2      ATCGTGGT
+28      4D      mbnl    	A10     TCGAGAGT
+29      4E      fox     	B8      TCGGATTC
+31      4F      fox     	A7      GATCTTGC
+32      4G      both    	B10     AGAGTCCA
+34      4H      both    	A8      AGGATAGC
+
+see in file:
+-> zcat 1294_S1_L008_R1_001.fastq.gz | less -S
+all are Phred+33 due to the presence of the "#"
+
+count how many lines in file (divide by 4 to get number of records)
+(do on interactive node, not login node!)
+-> srun --account=bgmp --partition=bgmp --nodes=1 --ntasks-per-node=1 --time=2:00:00 --cpus-per-task=1 --pty bash
+-> zcat 1294_S1_L008_R1_001.fastq.gz | wc -l
+->-> 1452986940/4 = 363,246,735
+
+count number of char in the phred score line (numChar - 1 = read length, since have newline char at end): 
+-> zcat 1294_S1_L008_R1_001.fastq.gz | head -2 | tail -1 | wc -m
+->-> 102
+-> zcat 1294_S1_L008_R2_001.fastq.gz | head -2 | tail -1 | wc -m
+->-> 9
+-> zcat 1294_S1_L008_R3_001.fastq.gz | head -2 | tail -1 | wc -m
+->-> 9
+-> zcat 1294_S1_L008_R4_001.fastq.gz | head -2 | tail -1 | wc -m
+->-> 102
+
+finding how many indexes have N's
+-> zcat 1294_S1_L008_R2_001.fastq.gz | sed -n 2~4p | grep "N" | wc -l
+->-> 3976613
+-> zcat 1294_S1_L008_R3_001.fastq.gz | sed -n 2~4p | grep "N" | wc -l
+->-> 3328051
+-> zcat 1294_S1_L008_R2_001.fastq.gz 1294_S1_L008_R3_001.fastq.gz | sed -n 2~4p | grep "N" | wc -l
+->-> 7304664S
+
+distribution historgram layout:
+	|
+	|
+mean 	|
+qscore	|
+	|_____________
+	     pos
+
+pos: range(0, readlength)
+mean qscore: range(0, 40/41)
+
+indexes dont match!
+-> might be the reverse complement?
+
+look @ 1st 5 barcodes (indexes) for both files
+do they match up?
+
+dual matched - on both ends of paired-end sequencing 
+
+high level functions:
+reverse complement function
+pulling each record from a file
+more?
+=================================================
+||                    Part2                    ||
+=================================================
+Pseudo code reviews... for Kobe, SJ, and Luiza
+=================================================
+||                    Part3                    ||
+=================================================
+Followed pseudocode pretty closely! Made some adjustments based on peer reviews from Isis, Matt, and Logan, but not much.
+
+Running my test files (summaryTests.txt is the currently meeting expected output):
+-> srun --account=bgmp --partition=bgmp --nodes=1 --time=2:00:00 --cpus-per-task=20 --pty bash
+-> ./demultiplexer.py -k /projects/bgmp/shared/2017_sequencing/indexes.txt -r1 ./Tests/inputTest_R1.fq.gz -i1 ./Tests/inputTest_R2.fq.gz -i2 ./Tests/inputTest_R3.fq.gz -r2 ./Tests/inputTest_R4.fq.gz -n 6
+
+Running sbatch script to run demultiplexer.py:
+-> sbatch runDemultiplexer.sh
+-> Time taken: Elapsed (wall clock) time (h:mm:ss or m:ss): 1:31:00
+(Runs about 15 minutes faster when I don't worry about extra summary information, but I think that stuff is important (most common index pair, most common hopped index pair).
+
+To gzip output files in /results after running demultiplexer.py (DO NOT GZIP IN PYTHON... SUPER SLOW!):
+(Running on interactive node)
+-> srun --account=bgmp --partition=bgmp --nodes=1 --time=2:00:00 --cpus-per-task=20 --pty bash
+-> /usr/bin/time -v pigz *.fq
+-> Time taken: Elapsed (wall clock) time (h:mm:ss or m:ss): 21:36.86
